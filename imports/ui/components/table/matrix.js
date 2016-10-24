@@ -1,15 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 
+import Item from './item';
 
 export default class table extends Component {
 
   renderRows(cardList){
-    tdstyle= {height:"121", width:"96"}
+    
+    that = this;
     return cardList.map(function(key, i){
       return (
         <tr key={i}>
           {key.map(function(item, j){
-            return (<td key={j} id={"table"+i+j} style={tdstyle}><img src="/images/card.jpg" /></td>)
+            return (<Item key={'t'+i+j}row={i} col={j} value={item}/>);
           })}
         </tr>
         )
@@ -33,5 +35,6 @@ export default class table extends Component {
 
 table.propTypes = {
   cardList: PropTypes.array.isRequired,
+  pstate: React.PropTypes.object.isRequired,
 
 };
