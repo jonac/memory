@@ -3,31 +3,17 @@ import classnames from 'classnames';
 
 
 export default class item extends Component {
-  constructor(props){
-    super(props);
-    this.state = {toggled: false, complete: false}
+
+  setToValue(){
+    document.getElementById('table'+this.props.row+this.props.col).innerHTML=this.props.value;
   }
 
-  clickHandler(val, row, col){
-    if (!this.state.complete) {
-      if (Session.get("picked")) {
-        // TODO kolla om det är samma element
-        document.getElementById('table'+row+col).innerHTML=val;
-        if(Session.equals('pickedValue', val)){
-          score = Session.get("score")+1;
-          Session.set("score",score);
-          document.getElementById('table'+row+col).innerHTML="";
+  setToPicture(){
+    document.getElementById('table'+this.props.row+this.props.col).innerHTML="<img src='/images/card.jpg' />";
+  }
 
-        }
-      } else {
-        document.getElementById('table'+row+col).innerHTML=val;
-        Session.set("pickedValue",val)
-        Session.set("picked",true)
-      }
-      console.log(Session.keys)
-      
-      this.setState({toggled: true});
-    }
+  setToCompleted(){
+    document.getElementById('table'+this.props.row+this.props.col).innerHTML="";
   }
 
   render() {
@@ -35,10 +21,8 @@ export default class item extends Component {
     let j = this.props.col;
     let item = this.props.value;
     let tdstyle= {height:121, width:96};
-    let classes = classnames({toggled: this.state.toggled});
-
     return (
-      <td key={j} id={"table"+i+j} className={classes} style={tdstyle} onClick={() => this.clickHandler(item,i,j)}><img src="/images/card.jpg" /></td>
+      <td key={j} id={"table"+i+j} style={tdstyle} onClick={() => this.props.click(this,item, i ,j)}><img src="/images/card.jpg" /></td>
     );
   }
 }
@@ -47,4 +31,5 @@ item.propTypes ={
   row: React.PropTypes.number.isRequired,
   col: React.PropTypes.number.isRequired,
   value: React.PropTypes.string.isRequired,
+  click: React.PropTypes.func.isRequired,
 }

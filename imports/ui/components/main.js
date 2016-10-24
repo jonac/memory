@@ -7,12 +7,11 @@ import ScoreBoard from "./scoreboard/scoreboard.js";
 export default class main extends Component {
   constructor(props){
     super(props);
-    this.state = {score:0, picked:false, pickedValue:'a' , pickedRow:0, pickedCol:0}
-    Session.set("score",0)
-    Session.set("picked", false)
-    Session.set("pickedValue",null)
-    Session.set("pickedRow",0)
-    Session.set("pickedCol",0)
+
+  }
+
+  incrementScore(){
+    this.refs.scoreboard.incrementScore()
   }
 
   render() {
@@ -20,13 +19,13 @@ export default class main extends Component {
     return (
       <div>
         <div className="container-fluid">
-          <Matrix cardList={cardMatrix} pstate={this.state} />
+          <Matrix cardList={cardMatrix} updateScore={this.incrementScore.bind(this)} />
         </div>
         <div>
-          <ScoreBoard pstate={this.state} />
+          <ScoreBoard ref={"scoreboard"}/>
         </div>
-      </div>
 
+      </div>
     );
   }
 }
