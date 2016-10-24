@@ -32,6 +32,10 @@ export default class table extends Component {
     }
   }
 
+  //TODO: Handle game ending
+  //TODO: put in wait times to let the player see the cards
+
+  // Render all rows for the table according to the inputlist
   renderRows(cardList){
     that = this;
     return cardList.map(function(key, i){

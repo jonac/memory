@@ -15,6 +15,7 @@ export default class main extends Component {
   }
 
   render() {
+    //TODO: setup ranomdly generated lists
     const cardMatrix= [['a','b','c','d'],['e','f','g','h'],['a','b','c','d'],['e','f','g','h']];
     return (
       <div>
